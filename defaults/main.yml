@@ -5,14 +5,14 @@ logstash_forwarder: {
   port: 5000,
   ssl_dir: /etc/ssl,
   ssl_certificate_file: cuesongs.com.chained.crt,
-  files:
-    - paths:
-        - /var/log/messages
-        - /var/log/auth.log
-      fields:
-        type: syslog
-    - paths:
-         - /var/www/current/app/storage/logs/laravel.log
-      fields:
-        type: syslog
+  files: [
+    {
+      paths: ["/var/log/messages", "/var/log/auth.log"],
+      fields: { type: syslog }
+    },
+    {
+      paths: [ "/var/www/current/app/storage/logs/laravel.log" ],
+      fields: { type: syslog }
+    }
+  ]
 }
